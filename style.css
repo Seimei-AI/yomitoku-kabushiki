@@ -192,20 +192,67 @@ main h2 {
   font-size: 0.92rem;
 }
 
-/* 企業一覧ページ：階層セクション */
-.tier-section {
-  margin-bottom: 48px;
+/* 銘柄一覧ハブページ */
+.tier-hub-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
 }
 
-.tier-intro {
-  color: var(--ink-muted);
-  font-size: 0.92rem;
-  max-width: 640px;
-  margin: -8px 0 20px;
-}
-
-.tier-section-hidden-gem .tier-intro {
+.tier-hub-card {
+  display: block;
+  background: var(--paper-card);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 24px;
+  text-decoration: none;
   color: var(--ink);
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.tier-hub-card:hover {
+  box-shadow: 0 8px 20px rgba(36, 32, 26, 0.1);
+  transform: translateY(-2px);
+}
+
+.tier-hub-card h3 {
+  font-family: var(--font-serif);
+  margin: 12px 0 8px;
+}
+
+.tier-hub-card p {
+  color: var(--ink-muted);
+  font-size: 0.9rem;
+  margin: 0 0 14px;
+}
+
+.tier-hub-count {
+  font-size: 0.78rem;
+  color: var(--accent);
+  font-weight: bold;
+}
+
+/* タイア間ナビ */
+.tier-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 32px;
+}
+
+.tier-nav a {
+  text-decoration: none;
+  color: var(--ink-muted);
+  font-size: 0.85rem;
+  padding: 6px 14px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+}
+
+.tier-nav a[aria-current="page"] {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
 }
 
 .company-card-grid {
