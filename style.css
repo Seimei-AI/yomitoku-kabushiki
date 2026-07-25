@@ -397,14 +397,6 @@ a.company-card:hover {
   font-size: 0.92rem;
 }
 
-.screener-table th[data-sort] {
-  user-select: none;
-}
-
-.screener-table th[data-sort]:hover {
-  color: var(--accent);
-}
-
 .screener-note {
   color: var(--ink-muted);
   font-size: 0.8rem;

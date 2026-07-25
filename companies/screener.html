@@ -28,7 +28,7 @@
 <div class="hero">
   <p class="eyebrow">銘柄データ（幅広・基礎データ層／準備中）</p>
   <h1>数値だけを、幅広く。<br>AI考察は「厳選銘柄」で。</h1>
-  <p class="lead">EDINETの財務数値を機械的に集計した一覧です。AIによる考察はつけず、まずは数字そのものを幅広い銘柄でご覧いただけるようにしていきます。列見出しをクリックすると並び替えできます。</p>
+  <p class="lead">EDINETの財務数値を機械的に集計した一覧です。AIによる考察はつけず、まずは数字そのものを幅広い銘柄でご覧いただけるようにしていきます。</p>
 </div>
 
 <main>
@@ -44,13 +44,13 @@
             <th>証券コード</th>
             <th>銘柄名</th>
             <th>セクター</th>
-            <th data-sort="roe" data-type="num">ROE</th>
-            <th data-sort="equity" data-type="num">自己資本比率</th>
-            <th data-sort="margin" data-type="num">営業利益率（直近）</th>
-            <th data-sort="per" data-type="num">PER</th>
-            <th data-sort="pbr" data-type="num">PBR</th>
-            <th data-sort="yield" data-type="num">配当利回り</th>
-            <th data-sort="cap" data-type="num">時価総額</th>
+            <th>ROE</th>
+            <th>自己資本比率</th>
+            <th>営業利益率（直近）</th>
+            <th>PER</th>
+            <th>PBR</th>
+            <th>配当利回り</th>
+            <th>時価総額</th>
             <th>詳細</th>
           </tr>
         </thead>
@@ -140,31 +140,6 @@
 (function () {
   var table = document.getElementById('screener-table');
   var tbody = table.querySelector('tbody');
-  var headers = table.querySelectorAll('th[data-sort]');
-  var sortState = { key: null, dir: 1 };
-
-  headers.forEach(function (th) {
-    th.style.cursor = 'pointer';
-    th.addEventListener('click', function () {
-      var key = th.getAttribute('data-sort');
-      var type = th.getAttribute('data-type');
-      var index = Array.from(th.parentNode.children).indexOf(th);
-
-      sortState.dir = (sortState.key === key) ? -sortState.dir : 1;
-      sortState.key = key;
-
-      var rows = Array.from(tbody.querySelectorAll('tr'));
-      rows.sort(function (a, b) {
-        var av = a.children[index].getAttribute('data-value');
-        var bv = b.children[index].getAttribute('data-value');
-        if (type === 'num') {
-          return (parseFloat(av) - parseFloat(bv)) * sortState.dir;
-        }
-        return av.localeCompare(bv, 'ja') * sortState.dir;
-      });
-      rows.forEach(function (row) { tbody.appendChild(row); });
-    });
-  });
 
   var filterInput = document.getElementById('screener-filter');
   filterInput.addEventListener('input', function () {
