@@ -41,16 +41,16 @@
       <table class="perf-table screener-table" id="screener-table">
         <thead>
           <tr>
-            <th>証券コード</th>
-            <th>銘柄名</th>
-            <th>セクター</th>
-            <th data-sort="roe">ROE</th>
-            <th data-sort="equity">自己資本比率</th>
-            <th data-sort="margin">営業利益率（直近）</th>
-            <th data-sort="per">PER</th>
-            <th data-sort="pbr">PBR</th>
-            <th data-sort="yield">配当利回り</th>
-            <th data-sort="cap">時価総額</th>
+            <th data-sort="code" data-type="text">証券コード</th>
+            <th data-sort="name" data-type="text">銘柄名</th>
+            <th data-sort="sector" data-type="text">セクター</th>
+            <th data-sort="roe" data-type="num">ROE</th>
+            <th data-sort="equity" data-type="num">自己資本比率</th>
+            <th data-sort="margin" data-type="num">営業利益率（直近）</th>
+            <th data-sort="per" data-type="num">PER</th>
+            <th data-sort="pbr" data-type="num">PBR</th>
+            <th data-sort="yield" data-type="num">配当利回り</th>
+            <th data-sort="cap" data-type="num">時価総額</th>
             <th>詳細</th>
           </tr>
         </thead>
@@ -275,6 +275,7 @@
   table.querySelectorAll('th[data-sort]').forEach(function (th) {
     th.addEventListener('click', function () {
       var key = th.getAttribute('data-sort');
+      var type = th.getAttribute('data-type');
       var index = Array.from(th.parentNode.children).indexOf(th);
 
       sortState.dir = (sortState.key === key) ? -sortState.dir : 1;
@@ -284,6 +285,9 @@
       rows.sort(function (a, b) {
         var av = a.children[index].getAttribute('data-value');
         var bv = b.children[index].getAttribute('data-value');
+        if (type === 'text') {
+          return av.localeCompare(bv, 'ja') * sortState.dir;
+        }
         var an = av === '' ? null : parseFloat(av);
         var bn = bv === '' ? null : parseFloat(bv);
         if (an === null && bn === null) return 0;
