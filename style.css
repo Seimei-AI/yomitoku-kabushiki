@@ -262,10 +262,22 @@ main h2 {
 }
 
 .company-card {
+  display: block;
   background: var(--paper-card);
   border: 1px solid var(--border);
   border-radius: 4px;
   padding: 22px;
+  text-decoration: none;
+  color: inherit;
+}
+
+a.company-card {
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+a.company-card:hover {
+  box-shadow: 0 8px 20px rgba(36, 32, 26, 0.1);
+  transform: translateY(-2px);
 }
 
 .company-card-hidden-gem {
