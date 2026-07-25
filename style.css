@@ -411,6 +411,22 @@ a.company-card:hover {
   margin-top: 12px;
 }
 
+.screener-view-btn {
+  display: inline-block;
+  background: var(--accent);
+  color: #fff;
+  text-decoration: none;
+  font-size: 0.8rem;
+  font-weight: bold;
+  padding: 6px 14px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.screener-view-btn:hover {
+  opacity: 0.85;
+}
+
 /* 業績推移テーブル＋簡易バーチャート */
 .table-scroll {
   overflow-x: auto;
