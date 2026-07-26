@@ -38,19 +38,19 @@
         <span class="tier-badge tier-attention">注目銘柄</span>
         <h3>注目銘柄</h3>
         <p>検索されやすく、話題性の高い人気銘柄。サイトの「顔」となるコーナーです。</p>
-        <span class="tier-hub-count">現在1銘柄</span>
+        <span class="tier-hub-count" data-count-source="attention.html">&nbsp;</span>
       </a>
       <a class="tier-hub-card" href="next.html">
         <span class="tier-badge tier-next">有望銘柄</span>
         <h3>有望銘柄</h3>
         <p>注目銘柄に近い知名度がありつつ、ROE・財務健全性の面でも堅実な銘柄です。</p>
-        <span class="tier-hub-count">現在3銘柄</span>
+        <span class="tier-hub-count" data-count-source="next.html">&nbsp;</span>
       </a>
       <a class="tier-hub-card" href="hidden-gem.html">
         <span class="tier-badge tier-hidden-gem">お宝銘柄</span>
         <h3>お宝銘柄</h3>
         <p>市場から厳しく評価されている企業が、一時的な逆風なのか本質的な変化なのかをAIが読み解くコーナーです。読みトク株式の最大の差別化ポイントです。</p>
-        <span class="tier-hub-count">現在1銘柄</span>
+        <span class="tier-hub-count" data-count-source="hidden-gem.html">&nbsp;</span>
       </a>
     </div>
   </section>
@@ -64,6 +64,19 @@
 <footer class="site-footer">
   <p>読みトク株式 — 準備中のプロジェクトです。</p>
 </footer>
+
+<script>
+document.querySelectorAll('[data-count-source]').forEach(function (el) {
+  var src = el.getAttribute('data-count-source');
+  fetch(src).then(function (res) { return res.text(); }).then(function (html) {
+    var doc = new DOMParser().parseFromString(html, 'text/html');
+    var count = doc.querySelectorAll('.company-card').length;
+    el.textContent = '現在' + count + '銘柄';
+  }).catch(function () {
+    el.textContent = '';
+  });
+});
+</script>
 
 </body>
 </html>
