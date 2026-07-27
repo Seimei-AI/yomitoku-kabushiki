@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>銘柄一覧 | 読みトク株式</title>
-<meta name="description" content="読みトク株式が取り上げる銘柄の一覧（MVP候補段階）。注目銘柄・有望銘柄・お宝銘柄の3つのコーナーで構成しています。">
+<meta name="description" content="読みトク株式の銘柄一覧（MVP候補段階）。市場を幅広くカバーする銘柄データと、その中からAIが選んだ特選銘柄（注目・有望・お宝銘柄）で構成しています。">
 <link rel="stylesheet" href="../style.css">
 </head>
 <body>
@@ -27,12 +27,24 @@
 
 <div class="hero">
   <p class="eyebrow">銘柄一覧（MVP候補・準備中）</p>
-  <h1>3つのコーナーで見せる、<br>「数字」と「文脈」の銘柄選び。</h1>
-  <p class="lead">話題性のある人気銘柄だけでなく、AIが「読み解く」ことに意味がある銘柄まで。良い銘柄が見つかり次第、それぞれのコーナーに追加していきます。</p>
+  <h1>市場を幅広くカバーする土台の上に、<br>AIが選んだ特選銘柄を。</h1>
+  <p class="lead">「銘柄データ」がEDINETの数値で市場全体をカバーする本体です。そこからAIが「読み解く」ことに意味があると判断した銘柄だけを、特選銘柄（注目・有望・お宝銘柄）として深掘りしていきます。</p>
 </div>
 
 <main>
   <section>
+    <h2>銘柄データ</h2>
+    <a class="sample-link-card" href="screener.html">
+      <span class="tag">市場全体をカバー</span>
+      <h3>EDINETの財務数値で、市場を幅広く網羅</h3>
+      <p>ROE・PBR・自己資本比率などの財務数値を機械的に収集した一覧です。AI考察はつけず、まずは数字そのものを幅広い銘柄でご覧いただけます。特選銘柄はすべてこの中から選ばれています。</p>
+      <span class="tier-hub-count" data-count-source="screener.html" data-count-target="tbody tr">&nbsp;</span>
+    </a>
+  </section>
+
+  <section>
+    <h2>特選銘柄</h2>
+    <p class="tier-intro">銘柄データの中から、AIが「読み解く」ことに意味があると判断した銘柄だけを3つのコーナーに分けて深掘りしています。</p>
     <div class="tier-hub-grid">
       <a class="tier-hub-card" href="attention.html">
         <span class="tier-badge tier-attention">注目銘柄</span>
@@ -68,9 +80,10 @@
 <script>
 document.querySelectorAll('[data-count-source]').forEach(function (el) {
   var src = el.getAttribute('data-count-source');
+  var selector = el.getAttribute('data-count-target') || '.company-card';
   fetch(src).then(function (res) { return res.text(); }).then(function (html) {
     var doc = new DOMParser().parseFromString(html, 'text/html');
-    var count = doc.querySelectorAll('.company-card').length;
+    var count = doc.querySelectorAll(selector).length;
     el.textContent = '現在' + count + '銘柄';
   }).catch(function () {
     el.textContent = '';
